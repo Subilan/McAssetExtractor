@@ -18,8 +18,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public final class McAssetExtractor {
-    private static final String VERSION_MANIFEST_URL = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
-    private static final String DOWNLOAD_URL_PREFIX = "http://resources.download.minecraft.net/";
+    private static String VERSION_MANIFEST_URL = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
+    private static String DOWNLOAD_URL_PREFIX = "http://resources.download.minecraft.net/";
 
     private void run(String version, File outDir) {
         String versionInfoUrl = findVersionInfoUrl(version);
@@ -243,10 +243,17 @@ public final class McAssetExtractor {
 
     public static void main(String[] args) {
         if (args.length < 2)
-            exitError("Expected arguments: <version> <destination>");
-
+            exitError("Expected arguments: <version> <destination> [use-bmclapi?]");
         String version = args[0];
         String outPath = args[1];
+        Boolean bmcl = false;
+        if (args.length == 3) {
+            bmcl = Boolean.parseBoolean(args[2]);
+        }
+        if (bmcl) {
+            VERSION_MANIFEST_URL = "https://bmclapi2.bangbang93.com/mc/game/version_manifest.json";
+            DOWNLOAD_URL_PREFIX = "https://bmclapi2.bangbang93.com/assets/";
+        }
         File outDir = new File(outPath);
         if (outDir.exists())
             exitError("Output directory already exists");
