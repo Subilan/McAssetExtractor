@@ -1,45 +1,19 @@
-# McAssetExtractor
+# minecraft-builder
 
-#### About
-McAssetExtractor is a tool to extract assets from Minecraft by
-downloading from Mojang's API. It uses [GSON](https://github.com/google/gson)
-to parse the API's JSON responses.
+Upstream: [rmheuer/McAssetExtractor](https://github.com/rmheuer/McAssetExtractor)
 
-The [wiki.vg](https://wiki.vg) page on [Game files](https://wiki.vg/Game_files)
-is a helpful resource to understand how this works.
+This is a fork of the original McAssetExtractor. It's repurposed to be a part of [Algorythm](https://github.com/Subilan/Algorythm) for downloading vanilla Minecraft game assets and other files from source provided by Mojang *or* its mirror, BMCLAPI.
 
-The primary goal of McAssetExtractor is to provide a convenient way
-to obtain Minecraft's assets while avoiding copyright issues. By
-providing a tool to download assets from Mojang, we avoid any
-potential copyright issues from distributing Minecraft's assets.
+## Build
 
-#### Building
+Different from the upstream, this project uses Gradle. To create a runnable build, just run
 
-Make sure you have Apache Maven installed, then run `mvn package`
-to build. The output JAR will be found in the `target/` directory.
-
-#### Running
-
-McAssetExtractor requires Java 1.8 or higher. Use
-`java -jar McAssetExtractor-1.0-jar-with-dependencies.jar <version> <destination>` to extract
-assets, replacing `<version>` with your desired version, and
-`<destination>` with a path to the destination directory.
-You can use the latest release or snapshot by setting the version to
-`latest` or `latest-snapshot`, respectively.
-
-This should give an output similar to the following:
-```
-Downloading assets for version 1.19
-Extracting assets from client JAR
-...
-Downloading assets from launcher meta
-...
-
-Summary:
-Extracted XXX assets from JAR
-Extracted XXX assets from launcher meta
+```bash
+gradle clean shadow # Include dependencies to make a runnable jar file.
 ```
 
-If any errors are present, make sure you are connected to the
-internet, and that you have specified a valid version and
-output directory.
+then the `jar` will appear in `build/libs` with the suffix `-all`.
+
+## License
+
+MIT

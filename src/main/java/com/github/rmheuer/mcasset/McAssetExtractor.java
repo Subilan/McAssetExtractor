@@ -159,7 +159,7 @@ public final class McAssetExtractor {
             exitError("Failed to unzip client JAR");
         }
 
-        return new int[] {count, fail};
+        return new int[] { count, fail };
     }
 
     private int[] extractMetaAssets(JsonObject assetIndex, File outputDir) {
@@ -188,13 +188,12 @@ public final class McAssetExtractor {
                 copyStreams(getDownloadStream(url), new FileOutputStream(targetFile), true);
                 count++;
             } catch (IOException e) {
-                e.printStackTrace();
                 System.err.println("Failed to download " + key + " from " + url + formatException(e));
                 fail++;
             }
         }
 
-        return new int[] {count, fail};
+        return new int[] { count, fail };
     }
 
     private void printSummary(int[] jar, int[] meta) {
@@ -213,7 +212,7 @@ public final class McAssetExtractor {
     }
 
     private InputStream getDownloadStream(String url) throws IOException {
-        //System.out.println("Downloading " + url);
+        // System.out.println("Downloading " + url);
         return new URL(url).openStream();
     }
 
@@ -242,6 +241,7 @@ public final class McAssetExtractor {
     }
 
     public static void main(String[] args) {
+        System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
         if (args.length < 2)
             exitError("Expected arguments: <version> <destination> [use-bmclapi?]");
         String version = args[0];
